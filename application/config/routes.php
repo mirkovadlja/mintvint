@@ -42,7 +42,9 @@ $route['default_controller'] = "home/view";
 $route['404_override'] = '';
 $route['(:any)/'] = 'home/view/$1';
 $route['posts']='post/viewall';
+$route['slika']='upload';
 $route['createnew']='post/createnew';
+$route['gallery']='gallery/view';
 
 
 

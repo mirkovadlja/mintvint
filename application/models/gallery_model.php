@@ -1,26 +1,33 @@
 <?php
-Class Post_model extends CI_Model {
+Class Gallery_model extends CI_Model {
 
 	public function __construct() {
 		parent::__construct();
 	}
 
 	public function total() {
-		return $this -> db -> count_all("post");
+		return $this -> db -> count_all("item");
 	}
 
-	public function getAll($limit, $start) {
+	public function getAll($limit, $start,$tag='') {
 		//dohvacanje svih postova(unutar zadanih granica zbog paginacije)
+		$this->db->select('*');
+		$this->db->from('item');
+		$this ->db -> where('naziv', 'item 1');
 		$this -> db -> limit($limit, $start);
-		$this -> db -> order_by("datum", "desc");
-		$query = $this -> db -> get('post');
-		if ($query -> num_rows() > 0) {
+		
+		
+		
+		
+		$query = $this -> db -> get();
+		var_dump($query->result());
+		/*if ($query -> num_rows() > 0) {
 			foreach ($query->result() as $row) {
 				$data[] = $row;
 			}
 			return $data;
 		}
-		return FALSE;
+		return FALSE;*/
 
 	}
 

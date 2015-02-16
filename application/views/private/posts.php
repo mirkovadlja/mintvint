@@ -4,8 +4,9 @@
 		<div class="large-12 columns">
 			<?php $this -> load -> view('sections/cp_menu.php'); ?>
 			<div class="hide-for-small">
-				<h1>tvoji postovi </h1>
-				<a href="<?php echo base_url('createnew'); ?>">stvori novi</a>
+				<h3 class="centar">UPRAVLJANJE POSTOVIMA</h3>
+				
+				<a class="button siroki" href="<?php echo base_url('createnew'); ?>">stvori novi</a>
 				<table>
 					<thead>
 						<tr>
@@ -30,31 +31,38 @@
 						
 						
 						
-<div id="delete_<?php echo $a->id ;?>" class="reveal-modal" data-reveal>
+<div id="delete_<?php echo $a->id ;?>" class="reveal-modal zatvori" data-reveal>
  
   <fieldset>
   	<?php echo form_open('post/deletePost'); ?>
-  		<h4><?php echo $a -> id;?></h4>
-  		jeste li sigurni da zelite obristi post:</br>
-  		<?php echo $a->naslov;
-  		?>
+  		
+  		<h4>Jeste li sigurni da želite obristi post pod naslovom:</h4>
+  		<h3><?php echo $a->naslov;?></h3>
+  		<h4>(Upozorenje: ova radnja je nepovratna!)</h4>
   		
   		<input type="hidden" name="id" value="<?php echo $a -> id;?>">
   		<input type="hidden" name="url" value="<?php echo current_url();?>">
-  		<input type="submit" value="obrisi"/>
+  		<input type="hidden" name="foto" value="<?php echo $a-> foto; ?>">
+  		<input type="hidden" name="foto_thumb" value="<?php echo $a-> foto_thumb; ?>">
+  		<input class="button odustani siroki" type="submit" value="Obrisi"/>
+  		
   		</form>
+
+  		<a class="button custom-close-reveal-modal siroki">Odustani</a>
 
   </fieldset>
   
   <a class="close-reveal-modal">&#215;</a>
 </div>
-<div id="pregled_<?php echo $a->id ;?>" class="reveal-modal" data-reveal>
+<div id="pregled_<?php echo $a->id ;?>" class="reveal-modal zatvori" data-reveal>
  
   <fieldset>
-  	<h2><?php echo $a->naslov?></h2>
+  	<h3><img src="<?php echo base_url(), 'assets/img/posts/',$a->foto_thumb; ?>" alt=""/>
+  	<?php echo $a->naslov?></h3>
   	<p><?php echo $a->sadrzaj;?></p>
-  		
- <a href="#" data-reveal-id="delete_<?php echo $a->id;?>" >delete</a>
+  	<div class="large-6 columns"><a class="button siroki" href="<?php echo base_url(), 'post/updatepost/', $a->id;?>" >Uredi</a></div>			
+  	<div class="large-6 columns"><a class="button odustani siroki" href="#" data-reveal-id="delete_<?php echo $a->id;?>">Obriši</a></div>
+ 		<a class="button custom-close-reveal-modal siroki">Odustani</a>
   		</form>
 
   </fieldset>
@@ -74,6 +82,7 @@
 	</div>
 
 	<?php $this -> load -> view('sections/footer_scripts.php'); ?>
+	
 </body>
 </html>
 

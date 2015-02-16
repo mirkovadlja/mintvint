@@ -16,7 +16,7 @@
 			</li>
 			<li class="divider hide-for-small"></li>
 			<li>
-				<a href="<?php echo base_url('user')?>/galerija">Galerije</a>
+				<a href="<?php echo base_url('gallery')?>">Galerije</a>
 			</li>
 			<li class="divider hide-for-small"></li>
 			<li>
