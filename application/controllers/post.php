@@ -11,7 +11,6 @@ class Post extends CI_Controller {
 		$this -> load -> model("post_model");
 		if (!$this -> session -> userdata('logged_in')) {redirect('login', 'refresh');
 		}
-
 	}
 
 	private function getSession() {
@@ -32,13 +31,13 @@ class Post extends CI_Controller {
 		$page = ($this -> uri -> segment(3)) ? $this -> uri -> segment(3) : 0;
 		$data["post"] = $this -> post_model -> getAll($config["per_page"], $page);
 		$data["links"] = $this -> pagination -> create_links();
-		$data['session'] = $this::getSession();
+		$data['session'] = $this->getSession();
 		$this -> load -> view('private/posts', $data);
 	}
 
 	public function createNew() {
 		//load view za unos novog posta
-		$data['session'] = $this::getSession();
+		$data['session'] = $this->getSession();
 		$this -> load -> view('private/createNew', $data);
 	}
 
@@ -53,7 +52,7 @@ class Post extends CI_Controller {
 		if ($this -> form_validation -> run() == FALSE) {
 			//neispravan unos vrati na unos s dosad unesenim podacima
 			$data['session'] = $this -> getSession();
-			$data['post'] = array('naslov' => $this -> input -> post('naslov'), 'sadrzaj' => $this -> input -> post('sadrzaj'), 'id' => $this -> input -> post('id'));
+			$data['post'] = array('naslov' => $this -> input -> post('naslov'), 'sadrzaj' => $this -> input -> post('sadrzaj'));
 			$this -> load -> view('private/createNew', $data);
 		} else {
 			//uneseni podaci ispravni nastavi
@@ -68,7 +67,7 @@ class Post extends CI_Controller {
 				//upload nije uspio, vrati na unos podataka s greskom
 				$data['error'] = $this -> upload -> display_errors();
 				$data['session'] = $this -> getSession();
-				$data['post'] = array('naslov' => $this -> input -> post('naslov'), 'sadrzaj' => $this -> input -> post('sadrzaj'), 'id' => $this -> input -> post('id'));
+				$data['post'] = array('naslov' => $this -> input -> post('naslov'), 'sadrzaj' => $this -> input -> post('sadrzaj'));
 				$this -> load -> view('private/createNew', $data);
 			} else {
 				//upload uspjesno izvrsen nastavi na spremanje podataka u bazu
@@ -101,7 +100,7 @@ class Post extends CI_Controller {
 
 	public function deletePost() {
 		//brisanje posta
-		$info = array('id' => $this -> input -> post('id'), 'foto' => $this -> input -> post('foto'), 'foto_thumb' => $this -> input -> post('foto_thumb'));
+		$info = array('id' => $this -> input -> post('id'),'old_foto' => $this -> input -> post('foto'), 'foto' => $this -> input -> post('foto'), 'foto_thumb' => $this -> input -> post('foto_thumb'));
 
 		$this -> post_model -> deletePost($info);
 		$url = $this -> input -> post('url');
@@ -143,7 +142,13 @@ class Post extends CI_Controller {
 		if ($this -> form_validation -> run() == FALSE) {
 			//neispravan unos
 			$data['session'] = $this -> getSession();
-			$data['post'] = array('naslov' => $this -> input -> post('naslov'), 'sadrzaj' => $this -> input -> post('sadrzaj'), 'id' => $this -> input -> post('id'), 'foto' => $this -> input -> post('foto'));
+			$data['post'] = array(
+			'naslov' => $this -> input -> post('naslov'), 
+			'sadrzaj' => $this -> input -> post('sadrzaj'), 
+			'id' => $this -> input -> post('id'), 
+			'foto' => $this -> input -> post('foto'),
+			'foto_thumb' => $this -> input -> post('foto_thumb')
+			);
 			$this -> load -> view('private/update', $data);
 		} else {
 			//ispravan unos nastavak na update

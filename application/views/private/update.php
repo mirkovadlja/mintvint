@@ -25,7 +25,7 @@
 			<input type="hidden" id="id" name="id" value="<?php echo $post['id']?>"/>
 			<input type="hidden" id="foto" name="foto" value="<?php echo $post['foto']?>"/>
 			<input type="hidden" id="foto_thumb" name="foto_thumb" value="<?php echo $post['foto_thumb']?>"/>
-			<?php echo $post['foto_thumb'], $post['foto'];?>
+			<?php //echo $post['foto_thumb'], $post['foto'];?>
 			<label for='current_img' >Foto:</label>
 			<img name="current_img" src="<?php echo(isset($post['foto_thumb']) ? base_url('assets/img/posts').'/'.$post['foto_thumb']:'')?>" alt=""/></br></br>
 			<label for="new_img">Promjeni fotografiju:

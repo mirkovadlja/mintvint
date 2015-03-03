@@ -34,11 +34,13 @@ Class Post_model extends CI_Model {
 		//brisanje posta po id-u
 
 		$this -> db -> query('delete from post where id=?', $info['id']);
+		if ($info['old_foto'] != 'default.jpeg') {
 		$this -> load -> library('ftp');
 		$image_thumb_path = realpath(APPPATH . '../assets/img/posts') . '/' . $info['foto_thumb'];
 		$image_path = realpath(APPPATH . '../assets/img/posts') . '/' . $info['foto'];
 		unlink($image_thumb_path);
 		unlink($image_path);
+		}
 		return TRUE;
 	}
 
@@ -62,14 +64,14 @@ Class Post_model extends CI_Model {
 		//update slike
 		//print_r ($img);
 		$this -> db -> query('update post set foto=?, foto_thumb=? where id=?', array($img['foto'], $img['foto_thumb'], $img['id']));
-		if($img['old_foto']!='default.jpeg'){
-		$image_thumb_path = realpath(APPPATH . '../assets/img/posts') . '/' . $img['old_foto_thumb'];
-		$image_path = realpath(APPPATH . '../assets/img/posts') . '/' . $img['old_foto'];
-		unlink($image_thumb_path);
-		unlink($image_path);
+		if ($img['old_foto'] != 'default.jpeg') {
+			$image_thumb_path = realpath(APPPATH . '../assets/img/posts') . '/' . $img['old_foto_thumb'];
+			$image_path = realpath(APPPATH . '../assets/img/posts') . '/' . $img['old_foto'];
+			unlink($image_thumb_path);
+			unlink($image_path);
 		}
 		return TRUE;
 
 	}
-
+	
 }

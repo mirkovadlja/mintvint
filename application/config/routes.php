@@ -45,6 +45,10 @@ $route['posts']='post/viewall';
 $route['slika']='upload';
 $route['createnew']='post/createnew';
 $route['gallery']='gallery/view';
+$route['newitem']='gallery/createnew';
+$route['tagitem']='gallery/tagitem';
+
+
 
 
 

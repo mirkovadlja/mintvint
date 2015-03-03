@@ -6,6 +6,7 @@
 			<div class="hide-for-small">
 				<h3 class="centar">UPRAVLJANJE POSTOVIMA</h3>
 				
+				
 				<a class="button siroki" href="<?php echo base_url('createnew'); ?>">stvori novi</a>
 				<table>
 					<thead>
